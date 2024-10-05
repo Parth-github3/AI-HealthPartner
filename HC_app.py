@@ -1,11 +1,5 @@
 from langchain_groq import ChatGroq
-import torch
-from langchain.chains import LLMChain, SimpleSequentialChain
-from langchain.prompts import PromptTemplate
 import streamlit as st
-import pandas as pd
-from langchain.memory import ConversationBufferMemory
-from langchain_core.runnables import RunnableParallel
 from langchain_core.prompts import ChatPromptTemplate
 from operator import itemgetter
 from langchain_core.output_parsers import StrOutputParser
