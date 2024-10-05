@@ -1,3 +1,4 @@
+#Requirements
 from langchain_groq import ChatGroq
 import streamlit as st
 from langchain_core.prompts import ChatPromptTemplate
@@ -12,7 +13,7 @@ llama = ChatGroq(
     temperature=0.0
 )
 
-#Diet
+##################################### Diet ###########################################
 base_diet_chain = (
     ChatPromptTemplate.from_template("""
 You are a nutritionist known for best personalized meal planning.  You have to create a meal plan for any given personalizations {personalizations}, 
@@ -40,23 +41,14 @@ Set the foods from the list for a meal suitable for the given requested plan wit
     | StrOutputParser()
 )     
 
-
-# Sequential chain
-
 Diet_chain = (
     base_diet_chain
     | nut_chain
     | bal_chain
 )    
-# Start a conversation
-# while True:
-#     user_input = input("You: ")
-#     if user_input.lower() == "quit":
-#         break
-#     response = pln.run(user_input)
-#     print("Chatbot:", response)
-        
-#HealthAdvisor
+      
+
+############################### HealthAdvisor #################################################
 ha_chain = (
     ChatPromptTemplate.from_template("""
 You are a Health care advisor AI who loves to care about human wellbeing.  You give health care  advices to the user, according to the problem: {problem} provided by the user, 
@@ -67,18 +59,7 @@ you also generate some key tips and plans to follow for the user to get better.
 )
 
 
-#sequential chain
-#ha_seq = SimpleSequentialChain(chains=[hc1_chain, hc_chain],  memory=ConversationBufferMemory())
-
-
-# while True:
-#         user_input = input("You: ")
-#         if user_input.lower() == "quit":
-#             break
-#         response = ha_chain.run(user_input)
-#         print("Chatbot:", response)
-
-#Diagnose-Treatment
+############################################ Diagnose-Treatment ######################################
 base_dt_chain = (
     ChatPromptTemplate.from_template("""
 You are an AI Health care advisor who loves to care about human wellbeing. You diagnose any disease by checking some symptoms provided to you, according to the the problem: {problem} provided by the user, 
@@ -132,6 +113,7 @@ responder_dt_chain = (
     | StrOutputParser()
 )
 
+
 DT_chain = (
     base_dt_chain
     | {
@@ -145,14 +127,9 @@ DT_chain = (
     | responder_dt_chain
 )
 
-# while True:
-#         user_input1 = input("You: ")
-#         if user_input1.lower() == "quit":
-#             break
-#         response = DT_chain.invoke(user_input1)
-#         print("Chatbot:", response)
 
-#Workout
+
+####################################### Workout ################################
 base_workout_chain = (
     ChatPromptTemplate.from_template("""
 You are an AI Gym Trainer who is known for making the best personalized workout plan. Personalization:{personalization} can contain attributes such as calorie focused, body weight, bmi, difficulty level, time constrained, place, environment, type of physical activity or any other specified personalizations given by the user. 
@@ -162,18 +139,11 @@ You also give special tips to help the user achieve the best form for every exer
 """)
     | llama
     | StrOutputParser()
-    #| {"base_response": RunnablePassthrough()}
 )
 
 
-# while True:
-#         user_input2 = input("You: ")
-#         if user_input2.lower() == "quit":
-#             break
-#         response = base_workout_chain.invoke(user_input2)
-#         print("Chatbot:", response)
 
-#Mental Health
+####################### Mental Health ######################################
 base_mh_chain = (
     ChatPromptTemplate.from_template("""
 You are an AI Psychiatrist who loves to care about human wellbeing. You are proficient in identifying, preventing and treating mental-health-related disorders. You diagnose the disease by checking some symptoms provided to you, from the the problem: {problem} provided by the user, 
@@ -231,14 +201,8 @@ MH_chain = (
     | responder_mh_chain
 )
 
-# while True:
-#         user_input3 = input("You: ")
-#         if user_input3.lower() == "quit":
-#             break
-#         response = MH_chain.invoke(user_input3)
-#         print("Chatbot:", response)
 
-#Cognitive behavioral therapy (CBT) You chat with every patient very interactively and you prefer to ask your questions  as a list which can be answered in a few words, boolean or rating.
+####################### Cognitive behavioral therapy (CBT) #####################################
 cbt_chain = (
     ChatPromptTemplate.from_template("""
 You are an AI Psychiatrist who loves to care about human wellbeing. You are proficient in Cognitive behavioral therapy (CBT), Interpersonal therapy (IPT), Graded exercise therapy, Cognitive-behavioral therapy for insomnia (CBT-I). 
@@ -249,18 +213,12 @@ Provide treatment to the patient by your chosen therapy.
     | StrOutputParser()
 )
 
-
-# while True:
-#         user_input4 = input("You: ")
-#         if user_input4.lower() == "quit":
-#             break
-#         response = base_cbt_chain.invoke(user_input4)
-#         print("Chatbot:", response)
-
+######################## Streamlit app #####################################
 
 # Title of the app
 st.title("AI Health Partner by PARTH")
 st.markdown("### ***Select your bot from options first.***")
+
 # Introduction text
 with st.expander("About app..."):
     st.write("""
@@ -338,10 +296,7 @@ class info:
         st.sidebar.markdown(mt_info)
     
     
-
-
 st.write("You selected:", option)
-# Get user input
 
 # Load Groq compiled LLaMA model (replace with your actual model path)
 @st.cache_resource
@@ -368,6 +323,7 @@ def generate_response(userinput):
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
+# getting User input
 userinput = st.chat_input("Say something")
 with st.chat_message("user"):
         st.write(userinput)
@@ -379,15 +335,6 @@ if userinput:
     bot_response = generate_response(userinput)
     st.session_state.messages.append({"role": "assistant", "content": bot_response})
 
-# with st.chat_message:
-#     user_input = st.text_input("You: ", key="user_input", help="Type your message and press Enter")
-
-# If user has input a message, update the chat history and get response
-# if user_input:
-#     st.session_state.messages.append({"role": "user", "content": user_input})
-#     bot_response = cbt_chain.invoke(user_input)
-#     st.session_state.messages.append({"role": "assistant", "content": bot_response})
-
 # Display chat history
 for message in st.session_state.messages:
     if message["role"] == "user":
@@ -395,5 +342,3 @@ for message in st.session_state.messages:
     else:
         st.write(f"Bot: {message['content']}")
 
-# Clear input field after submission
-#st.chat_message.empty()
