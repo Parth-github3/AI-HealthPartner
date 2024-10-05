@@ -1,9 +1,5 @@
 langchain_groq
-langchain.chains
-torch
 streamlit
-pandas
-langchain.memory
 langchain_core.runnables
 langchain_core.prompts
 langchain_core.output_parsers
