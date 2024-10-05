@@ -260,7 +260,7 @@ Provide treatment to the patient by your chosen therapy.
 
 # Title of the app
 st.title("AI Health Partner by PARTH")
-
+st.markdown("## Select your bot from options first.")
 # Introduction text
 with st.expander("About app..."):
     st.write("""
