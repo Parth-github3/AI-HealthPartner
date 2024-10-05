@@ -1,4 +1,4 @@
 langchain_groq
-langchain_core.runnables
+langchain_core.runnables==0.3.9
 langchain_core.prompts
 langchain_core.output_parsers
