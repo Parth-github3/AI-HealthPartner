@@ -1,2 +1,2 @@
-langchain_groq
-langchain_core
+langchain-groq
+langchain-core
