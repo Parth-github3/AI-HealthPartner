@@ -1,4 +1,4 @@
-install --upgrade pip
+pip==24.2
 langchain_groq
 streamlit
 langchain_core.runnables
