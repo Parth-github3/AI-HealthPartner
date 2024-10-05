@@ -1,6 +1,5 @@
-pip==24.2
 langchain_groq
 streamlit
-langchain_core.runnables==0.3
+langchain_core.runnables
 langchain_core.prompts
 langchain_core.output_parsers
