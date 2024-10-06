@@ -230,7 +230,7 @@ with st.expander("About app..."):
 
 # Sidebar for additional information
 
-option= st.sidebar.selectbox(
+option= st.selectbox(
     "Hello! How can I help you?",
     ("Health advisor", "Diet", "Workout", "Diagnose-Treatment", "Mental Health", "Mental Therapy"),
     index=None,
