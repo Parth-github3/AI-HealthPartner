@@ -231,7 +231,7 @@ with st.expander("About app..."):
 # Sidebar for additional information
 
 option= st.selectbox(
-    "Hello! How can I help you?", "Select your bot from options first.",
+    "Hello! How can I help you? Select your bot from options first.",
     ("Health advisor", "Diet", "Workout", "Diagnose-Treatment", "Mental Health", "Mental Therapy"),
     index=None,
     placeholder="Select any...",
