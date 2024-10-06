@@ -217,7 +217,7 @@ Provide treatment to the patient by your chosen therapy.
 
 # Title of the app
 st.title("AI Health Partner by PARTH")
-st.markdown("### ***Select your bot from options first.***")
+#st.markdown("### ***Select your bot from options first.***")
 
 # Introduction text
 with st.expander("About app..."):
@@ -231,7 +231,7 @@ with st.expander("About app..."):
 # Sidebar for additional information
 
 option= st.selectbox(
-    "Hello! How can I help you?",
+    "Hello! How can I help you?", "Select your bot from options first.",
     ("Health advisor", "Diet", "Workout", "Diagnose-Treatment", "Mental Health", "Mental Therapy"),
     index=None,
     placeholder="Select any...",
