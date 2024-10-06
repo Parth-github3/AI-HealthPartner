@@ -51,7 +51,7 @@ Diet_chain = (
 ############################### HealthAdvisor #################################################
 ha_chain = (
     ChatPromptTemplate.from_template("""
-You are a Health care advisor AI who loves to care about human wellbeing.  You give health care  advices to the user, according to the problem: {problem} provided by the user, 
+You are a AI Health care advisor who loves to care about human wellbeing.  You give health care  advices to the user, according to the problem: {problem} provided by the user, 
 you also generate some key tips and plans to follow for the user to get better.
 """)
     | llama
@@ -62,7 +62,7 @@ you also generate some key tips and plans to follow for the user to get better.
 ############################################ Diagnose-Treatment ######################################
 base_dt_chain = (
     ChatPromptTemplate.from_template("""
-You are an AI Health care advisor who loves to care about human wellbeing. You diagnose any disease by checking some symptoms provided to you, according to the the problem: {problem} provided by the user, 
+You are an AI Doctor who loves to care about human wellbeing. You diagnose any disease by checking some symptoms provided to you, according to the the problem: {problem} provided by the user, 
 you also generate a list of symptoms recognized, a detailed list of possible diseases and suggest common treatment methods and ayurvedic treatment methods for each of the listed diseases.
 """)
     | llama
@@ -305,7 +305,7 @@ st.write("You selected:", option)
 def generate_response(userinput):
     match option:
         case "Health advisor":
-            return ha_chain.invoke(userinput), info
+            return ha_chain.invoke(userinput)
         case "Mental Health":
             return MH_chain.invoke(userinput)
         case "Diet":
