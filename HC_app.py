@@ -215,7 +215,7 @@ Provide treatment to the patient by your chosen therapy.
 
 lmchain = (
     ChatPromptTemplate.from_template("""
-You are provided a university syllabus. analyze the given syllabus {txt} and identify the 'List of experiments' and make a lab manual for the given experiments in the list.
+You are provided a university syllabus. analyze the given syllabus {txt}, understand the concepts covered in it. Now, identify the 'List of experiments' and make a lab manual for the given experiments as asked.
 """)
     | llama
     | StrOutputParser()
@@ -340,8 +340,7 @@ def generate_response(userinput):
             return cbt_chain.invoke(userinput)
         case default:
             return "Nothing"
-# if option == "lm":
-#     ryo=lmchain.invoke(txt)       
+  
  
 if "messages" not in st.session_state:
     st.session_state.messages = []
