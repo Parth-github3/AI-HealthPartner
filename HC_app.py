@@ -219,32 +219,6 @@ Explain the following Steps {step} for an experiment
     | llama
     | StrOutputParser()
 )
-# lmchain = (
-#     ChatPromptTemplate.from_template("""
-# You are provided a university syllabus. analyze the given syllabus {txt}, understand the concepts covered in it. Now, identify the 'List of experiments' and make a lab manual for the given experiments as asked.
-# Present the lab manual in this format: 
-#                                      "Objective: " 
-#                                      "Procedure: "
-#                                      "Output: "
-# Also, explain each step for every experiment and write code where it is required.
-# """)
-#     | llama
-#     | StrOutputParser()
-# )
-# import pdfplumber
-# uploaded_files = st.file_uploader(
-#         "Upload your PYQ papers below. (Only .pdf is allowed)", accept_multiple_files=True
-#     )
-# def extract():
-    
-#         extracted_text = []
-#         for file in uploaded_files:
-#             with pdfplumber.open(file) as pdf:
-#                 for page in pdf.pages:
-#                     extracted_text.append(page.extract_text())
-                   
-#         return extracted_text
-# txt= extract()
 
 ######################## Streamlit app #####################################
 
@@ -348,7 +322,7 @@ def generate_response(userinput):
         case "Diagnose-Treatment":
             return DT_chain.invoke(userinput)
         case "Mental Therapy":
-            return pchain.invoke(userinput)
+            return cbt_chain.invoke(userinput)
         case default:
             return "Nothing"
   
