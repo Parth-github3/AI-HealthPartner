@@ -341,10 +341,7 @@ if userinput:
     st.session_state.messages.append({"role": "user", "content": userinput})
     bot_response = generate_response(userinput)
     st.session_state.messages.append({"role": "assistant", "content": bot_response})
-if st.button("Submit"):
-     message = st.chat_message("assistant")
-     bot_response = lmchain.invoke(txt)
-     st.session_state.messages.append({"role": "assistant", "content": bot_response})
+
      
 # Display chat history
 for message in st.session_state.messages:
