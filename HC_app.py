@@ -213,6 +213,28 @@ Provide treatment to the patient by your chosen therapy.
     | StrOutputParser()
 )
 
+lmchain = (
+    ChatPromptTemplate.from_template("""
+You are provided a university syllabus. analyze the given syllabus {txt} and identify the 'List of experiments' and make a lab manual for the given experiments in the list.
+""")
+    | llama
+    | StrOutputParser()
+)
+import pdfplumber
+uploaded_files = st.file_uploader(
+        "Upload your PYQ papers below. (Only .pdf is allowed)", accept_multiple_files=True
+    )
+def extract():
+    
+        extracted_text = []
+        for file in uploaded_files:
+            with pdfplumber.open(file) as pdf:
+                for page in pdf.pages:
+                    extracted_text.append(page.extract_text())
+                   
+        return extracted_text
+txt= extract()
+
 ######################## Streamlit app #####################################
 
 # Title of the app
@@ -232,7 +254,7 @@ with st.expander("About app..."):
 
 option= st.selectbox(
     "Select your bot from options given below. Description of bots are provided in the sidebar.",
-    ("Health advisor", "Diet", "Workout", "Diagnose-Treatment", "Mental Health", "Mental Therapy"),
+    ("Health advisor", "Diet", "Workout", "Diagnose-Treatment", "Mental Health", "Mental Therapy", "lm"),
     index=None,
     placeholder="Select any...",
 )
@@ -318,7 +340,8 @@ def generate_response(userinput):
             return cbt_chain.invoke(userinput)
         case default:
             return "Nothing"
-    
+if option == "lm":
+    ryo=lmchain.invoke(txt)       
  
 if "messages" not in st.session_state:
     st.session_state.messages = []
