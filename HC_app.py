@@ -220,7 +220,7 @@ Present the lab manual in this format:
                                      "Objective: " 
                                      "Procedure: "
                                      "Output: "
-Also, give explanations for the "Procedure" and write code where it is required.
+Also, give explanations for the all the sections and write code where it is required.
 """)
     | llama
     | StrOutputParser()
