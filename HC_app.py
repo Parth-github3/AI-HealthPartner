@@ -216,6 +216,11 @@ Provide treatment to the patient by your chosen therapy.
 lmchain = (
     ChatPromptTemplate.from_template("""
 You are provided a university syllabus. analyze the given syllabus {txt}, understand the concepts covered in it. Now, identify the 'List of experiments' and make a lab manual for the given experiments as asked.
+Present the lab manual in this format: 
+                                     "Objective: " 
+                                     "Procedure: "
+                                     "Output: "
+Also, give explanations and write code where it is required.
 """)
     | llama
     | StrOutputParser()
